@@ -51,3 +51,44 @@ or test failures. A more extensive list of these merges can be found in
     - src/java/voldemort/client/rebalance/MigratePartitions.java
     - test/unit/voldemort/client/rebalance/MigratePartitionsTest.java
 
+### Details
+
+#### c5c24d75ec20b8457e03f2fe50d7fbb9eb20b64d
+
+Changes at 02342be701e9bec1ab38be71107c21fd2107350c
+
+`src/java/voldemort/store/routed/action/ConfigureNodes.java`
+
+                 if(pipeline.getOperation() != Operation.PUT) {
+                     // GET, GET_VERSIONS, DELETE
+     
+    -                // Add a node from every zone, upto a max of zoneCountReads.
+    +                // Add a node from every zone, upto a max of
+    +                // zoneCountReads/zoneCountWrites.
+                     for(int index = 0; index < pipelineData.getZonesRequired(); index++) {
+                         List<Node> zoneNodes = zoneIdToNode.get(zoneProximityList.get(index));
+                         if(zoneNodes != null && zoneNodes.size() > 0) {
+
+Changes at 6c1d6ccf2ae983e2788ee388da5cf9dbb10fddf3
+
+This is only a merge, so there are no changes here. However, the commit it
+is the resulting merge of is c856bb0819594cc9ff0227123d65e2b3b016b0c7, which
+does contain changes that are in the
+`src/java/voldemort/store/routed/action/ConfigureNodes.java` file.
+
+-> Changes at c856bb0819594cc9ff0227123d65e2b3b016b0c7
+
+`src/java/voldemort/store/routed/action/ConfigureNodes.java`
+
+ 
+                 nodes = new ArrayList<Node>();
+                 LinkedList<Integer> zoneProximityList = this.clientZone.getProximityList();
+    -            if(pipeline.getOperation() != Operation.PUT) {
+    -                // GET, GET_VERSIONS, DELETE
+    +            if(pipeline.getOperation() != Operation.PUT
+    +               && pipeline.getOperation() != Operation.DELETE) {
+    +                // GET, GET_VERSIONS
+     
+                     // Add a node from every zone, upto a max of zoneCountReads.
+                     for(int index = 0; index < pipelineData.getZonesRequired(); index++) {
+
