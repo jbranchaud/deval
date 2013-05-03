@@ -142,13 +142,14 @@ Notes: There were some annotations that were removed as well as Logging.
 Notes: This seems like another class that will be ripe for stubbing out. It
 relies on some external notifications for making a node available or not.
 This can just be mocked up rather than relying on the `client.ClientConfig`
-and `server.VoldemortConfig`. Another issue here is that this class extends
-an abstract class
-(`voldemort.cluster.failuredetector.AbstractFailureDetector`), so we are
-going to have to figure out how to deal with that. Possibly by pulling the
-functionality from the abstract class down into this class.
+and `server.VoldemortConfig`.
+This functionality from the abstract class that this class extended has been
+collapsed on this class, so it no longer needs the `AbstractFailureDetector`
+which means that it is no longer polymorphic. Additionally, there were some
+listeners that could be subscribed to for notification which I have removed
+as well in order to eliminate that additional dependency.
 
-`src/voldemort/cluster/failuredetector/FailureDetector.java`
+~~`src/voldemort/cluster/failuredetector/FailureDetector.java`~~
 
 - `voldemort.cluster.Node`
 - `voldemort.store.UnreachableStoreException`
