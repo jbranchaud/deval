@@ -28,6 +28,26 @@ believe ultimately depends on `log4j.jar`. In order to reduce dependencies
 that are not necessary, this logging functionality is going to be removed
 from all classes listed below.
 
+Collective Dependencies:
+
+Non-Voldemort Dependencies
+
+- `org.junit.*`
+- `java.util.*`
+- `java.io.Serializable`
+
+Voldemort.cluster Dependencies
+
+- `voldemort.cluster.Cluster`
+- `voldemort.cluster.Node`
+- `voldemort.cluster.Zone`
+- `voldemort.cluster.failuredetector.BannagePeriodFailureDetector`
+- `voldemort.cluster.failuredetector.FailureDetector`
+- `voldemort.cluster.failuredetector.FailureDetectorConfig`
+
+
+---
+
 `src/voldemort/MainDecaf.java`
 
 - `org.junit.*`
@@ -80,6 +100,8 @@ two enums used in class (`Pipeline.Event` and `Pipeline.Operation`).
 
 - `java.io.Serializable`
 - `java.util.*`
+- `voldemort.cluster.Node`
+- `voldemort.cluster.Zone`
 - `voldemort.VoldemortException`
 - ~~`voldemort.annotations.concurrency.Threadsafe`~~
 - ~~`voldemort.annotations.jmx.JmxGetter`~~
@@ -90,3 +112,65 @@ two enums used in class (`Pipeline.Event` and `Pipeline.Operation`).
 Notes: Three of the dependencies have to do with Voldemort-specific Java
 annotations, perhaps these can be removed while still allowing the program
 to work correctly in the context of our evaluation.
+
+`src/voldemort/cluster/Node.java`
+
+- `java.io.Serializable`
+- `java.net.*`
+- `java.utils.List`
+- `voldemort.utils.Utils`
+- `com.google.common.collect.ImmutableList`
+
+Notes: There were some annotations that were removed as well as Logging.
+
+`src/voldemort/cluster/Zone.java`
+
+- `java.io.Serializable`
+- `java.util.*`
+
+`src/voldemort/cluster/failuredetector/BannagePeriodFailureDetector.java`
+
+- `java.utils.*`
+- `org.apache.commons.lang.StringUtils`
+- ~~`voldemort.annotations.jmx.JmxGetter`~~
+- ~~`voldemort.annotations.jmx.JmxManaged`~~
+- `voldemort.client.ClientConfig`
+- `voldemort.cluster.Node`
+- `voldemort.server.VoldemortConfig`
+- `voldemort.store.UnreachableStoreException`
+
+Notes: This seems like another class that will be ripe for stubbing out. It
+relies on some external notifications for making a node available or not.
+This can just be mocked up rather than relying on the `client.ClientConfig`
+and `server.VoldemortConfig`. Another issue here is that this class extends
+an abstract class
+(`voldemort.cluster.failuredetector.AbstractFailureDetector`), so we are
+going to have to figure out how to deal with that. Possibly by pulling the
+functionality from the abstract class down into this class.
+
+`src/voldemort/cluster/failuredetector/FailureDetector.java`
+
+- `voldemort.cluster.Node`
+- `voldemort.store.UnreachableStoreException`
+
+Notes: this is an *interface*, so we need to figure out how to deal with
+that. It seems like if the functionality from `AbstractFailureDetector` and
+the structure of `FailureDetector` can simply be captured in the
+`BannagePeriodFailureDetector` class, then we will have eliminated a few
+dependencies and the polymorphism.
+
+`src/voldemort/cluster/failuredetector/FailureDetectorConfig.java`
+
+- `java.net.*`
+- `java.util.*`
+- `voldemort.client.ClientConfig`
+- `voldemort.cluster.Node`
+- `voldemort.server.VoldemortConfig`
+- `voldemort.utils.SystemTime`
+- `voldemort.utils.Time`
+- `voldemort.utils.Utils`
+
+Notes: Again, I think we are going to need to stub out the `ClientConfig`
+and `VoldemortConfig` classes. It also seems like low hanging fruit to stub
+out the `SystemTime` and `Time` utils since they are probably just used to
+produce time values which can be spoofed.
