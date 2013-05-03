@@ -73,4 +73,20 @@ extras are `Node` and `Zone` which I think are light-weight POJOs.
 
 Notes: First, I think Pipeline.java can potentially be stubbed out.
 Regardless of that, I think the only dependencies are a couple Exception
-classes and the Action class, so it is pretty light-weight.
+classes and the Action class, so it is pretty light-weight. There are also
+two enums used in class (`Pipeline.Event` and `Pipeline.Operation`).
+
+`src/voldemort/cluster/Cluster.java`
+
+- `java.io.Serializable`
+- `java.util.*`
+- `voldemort.VoldemortException`
+- ~~`voldemort.annotations.concurrency.Threadsafe`~~
+- ~~`voldemort.annotations.jmx.JmxGetter`~~
+- ~~`voldemort.annotations.jmx.JmxManaged`~~
+- `voldemort.utils.Utils`
+- `com.google.common.collect.Sets`
+
+Notes: Three of the dependencies have to do with Voldemort-specific Java
+annotations, perhaps these can be removed while still allowing the program
+to work correctly in the context of our evaluation.
