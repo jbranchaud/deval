@@ -42,7 +42,7 @@ Voldemort.cluster Dependencies
 - `voldemort.cluster.Node`
 - `voldemort.cluster.Zone`
 - `voldemort.cluster.failuredetector.BannagePeriodFailureDetector`
-- `voldemort.cluster.failuredetector.FailureDetector`
+- ~~`voldemort.cluster.failuredetector.FailureDetector`~~
 - `voldemort.cluster.failuredetector.FailureDetectorConfig`
 
 
@@ -82,7 +82,10 @@ Voldemort.cluster Dependencies
 
 Notes: There is a lot of overlap between the dependencies in this class and
 what is needed to get things setup in MainDecaf in the first place. The only
-extras are `Node` and `Zone` which I think are light-weight POJOs.
+extras are `Node` and `Zone` which I think are light-weight POJOs. This
+class extends AbstractConfigureNodes which in turn extends AbstractAction.
+Both of these abstract classes have been collapsed into ConfigureNodes and
+then removed.
 
 `src/voldemort/store/routed/Pipeline.java`
 
