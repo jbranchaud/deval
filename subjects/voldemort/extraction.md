@@ -69,6 +69,11 @@ Voldemort.cluster Dependencies
 - `voldemort.utils.ByteArray`
 - `voldemort.xml.ClusterMapper`
 
+`src/voldemort/config/*`
+
+Notes: This directory contains a collection of XML files that can be read in
+to build some objects with data that will be used for tests.
+
 `src/voldemort/store/routed/action/ConfigureNodes.java`
 
 - `java.util.*`
