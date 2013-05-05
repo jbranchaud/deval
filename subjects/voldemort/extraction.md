@@ -124,6 +124,24 @@ deleted the method that returned a particulary constant type for this class.
 The other routing strategy classes had to be deleted as well
 (`ConsistentRoutingStrategy` and `ZoneRoutingStrategy`).
 
+`src/voldemort/routing/RoutingStrategyFactory.java`
+
+- ~~`voldemort.routing.RoutingStrategy`~~
+- ~~`voldemort.routing.RoutingStrategyType`~~
+- ~~`voldemort.routing.ConsistentRoutingStrategy`~~
+- ~~`voldemort.routing.ZoneRoutingStrategy`~~
+- `voldemort.cluster.Cluster`
+- `voldemort.store.StoreDefinition`
+
+Most of the functionality for this class has been removed since it only
+produces one kind of Routing Strategy now. It also has a parameter in its
+only method for a `StorDefinition`, but this seems completely unneeded since
+the `RoutingToAllStrategy doesn's seem to need it.
+
+`src/voldemort/cluster/failuredetector/NodeStatus`
+
+This class has no dependencies, so it can be left as is.
+
 `src/voldemort/cluster/Cluster.java`
 
 - `java.io.Serializable`
