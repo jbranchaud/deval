@@ -112,6 +112,18 @@ BasicPipelineData instead. The generics parameterization for this class had
 to be modifed to include the ByteArray since it was no longer relying on
 PipelineData.
 
+`src/voldemort/routing/RouteToAllStrategy.java`
+
+- ~~`voldemort.routing.RoutingStrategy`~~
+- ~~`voldemort.routing.RoutingStrategyType`~~
+- `voldemort.cluster.Node`
+
+Notes: Removed the interface dependency and then deleted that interface
+(`RoutingStrategy`). Also, removed the `RoutingStrategyType` class and
+deleted the method that returned a particulary constant type for this class.
+The other routing strategy classes had to be deleted as well
+(`ConsistentRoutingStrategy` and `ZoneRoutingStrategy`).
+
 `src/voldemort/cluster/Cluster.java`
 
 - `java.io.Serializable`
