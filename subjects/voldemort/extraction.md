@@ -44,7 +44,10 @@ Voldemort.cluster Dependencies
 - `voldemort.cluster.failuredetector.BannagePeriodFailureDetector`
 - ~~`voldemort.cluster.failuredetector.FailureDetector`~~
 - `voldemort.cluster.failuredetector.FailureDetectorConfig`
-
+- ~~`voldemort.cluster.failuredetector.AbstractFailureDetector`~~
+- ~~`voldemort.cluster.failuredetector.AsyncRecoveryFailureDetector`~~
+- ~~`voldemort.cluster.failuredetector.NoopFailureDetector`~~
+- ~~`voldemort.cluster.failuredetector.ThresholdFailureDetector`~~
 
 ---
 
@@ -85,7 +88,9 @@ what is needed to get things setup in MainDecaf in the first place. The only
 extras are `Node` and `Zone` which I think are light-weight POJOs. This
 class extends AbstractConfigureNodes which in turn extends AbstractAction.
 Both of these abstract classes have been collapsed into ConfigureNodes and
-then removed.
+then removed. There is still an extends in one of the generics for the
+PipelineData, so this also needs to be abstracted at some point which should
+take some work.
 
 `src/voldemort/store/routed/Pipeline.java`
 
@@ -98,6 +103,14 @@ Notes: First, I think Pipeline.java can potentially be stubbed out.
 Regardless of that, I think the only dependencies are a couple Exception
 classes and the Action class, so it is pretty light-weight. There are also
 two enums used in class (`Pipeline.Event` and `Pipeline.Operation`).
+
+`src/voldemort/store/routed/BasicPipelineData.java`
+
+Notes: The abstract class, PipelineData, has been collapsed into this class
+and the other classes that use PipelineData have been modified to use
+BasicPipelineData instead. The generics parameterization for this class had
+to be modifed to include the ByteArray since it was no longer relying on
+PipelineData.
 
 `src/voldemort/cluster/Cluster.java`
 
