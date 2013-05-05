@@ -136,16 +136,36 @@ The other routing strategy classes had to be deleted as well
 Most of the functionality for this class has been removed since it only
 produces one kind of Routing Strategy now. It also has a parameter in its
 only method for a `StorDefinition`, but this seems completely unneeded since
-the `RoutingToAllStrategy doesn's seem to need it.
+the `RoutingToAllStrategy doesn's seem to need it. It might be that this
+class can be removed all together since it doesn't appear to be a dependency
+for any other class.
 
 `src/voldemort/cluster/failuredetector/NodeStatus`
 
 This class has no dependencies, so it can be left as is.
 
+`src/voldemort/xml/ClusterMapper.java`
+
+- `java.io.*`
+- `java.util.*`
+- `javax.xml.*`
+- `org.apache.commons.lang.StringUtils`
+- `org.jdom.*`
+- `org.xml.sax.SAXException`
+- `voldemort.cluster.Cluster`
+- `voldemort.cluster.Node`
+- `voldemort.cluster.Zone`
+- `voldemort.utils.Utils`
+
+Notes: This class can probably be stubbed out to return a String of some XML
+format instead of actually accessing and reading an XML file. The voldemort
+dependencies are limited to `Cluster`, `Node`, and `Zone` which are already
+staying plus the `Utils` class.
+
 `src/voldemort/cluster/Cluster.java`
 
 - `java.io.Serializable`
-- `java.util.*`
+- `java.util.\*`
 - `voldemort.cluster.Node`
 - `voldemort.cluster.Zone`
 - `voldemort.VoldemortException`
@@ -162,7 +182,7 @@ to work correctly in the context of our evaluation.
 `src/voldemort/cluster/Node.java`
 
 - `java.io.Serializable`
-- `java.net.*`
+- `java.net.\*`
 - `java.utils.List`
 - `voldemort.utils.Utils`
 - `com.google.common.collect.ImmutableList`
@@ -172,11 +192,11 @@ Notes: There were some annotations that were removed as well as Logging.
 `src/voldemort/cluster/Zone.java`
 
 - `java.io.Serializable`
-- `java.util.*`
+- `java.util.\*`
 
 `src/voldemort/cluster/failuredetector/BannagePeriodFailureDetector.java`
 
-- `java.utils.*`
+- `java.utils.\*`
 - `org.apache.commons.lang.StringUtils`
 - ~~`voldemort.annotations.jmx.JmxGetter`~~
 - ~~`voldemort.annotations.jmx.JmxManaged`~~
@@ -206,6 +226,15 @@ the structure of `FailureDetector` can simply be captured in the
 `BannagePeriodFailureDetector` class, then we will have eliminated a few
 dependencies and the polymorphism.
 
+`src/voldemort/cluster/failuredetector/FailureDetectorUtils.java`
+
+- `voldemort.utils.ReflectUtils`
+
+Notes: This class seems to utilize reflection in some way through the use of
+the `ReflectUtils` class, so this might need to be addressed and removed at
+some point. However, I think at this point that the class is not even being
+used by anything.
+
 `src/voldemort/cluster/failuredetector/FailureDetectorConfig.java`
 
 - `java.net.*`
@@ -221,3 +250,15 @@ Notes: Again, I think we are going to need to stub out the `ClientConfig`
 and `VoldemortConfig` classes. It also seems like low hanging fruit to stub
 out the `SystemTime` and `Time` utils since they are probably just used to
 produce time values which can be spoofed.
+
+`src/voldemort/server/VoldemortConfig.java`
+
+This is one of the larger classes and it has quite a few dependencies, so we
+are going to need to either fix it or stub it out in order to make it
+feasible for this projec.
+
+`src/voldemort/client/ClientConfig.java`
+
+This class is similar to `VoldemortConfig` in a lot of ways. It is a rather
+large class with a ton of dependencies, so it needs to be gone through
+careful to make sure the appropriate functionality is removed.
