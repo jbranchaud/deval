@@ -267,3 +267,28 @@ feasible for this projec.
 This class is similar to `VoldemortConfig` in a lot of ways. It is a rather
 large class with a ton of dependencies, so it needs to be gone through
 careful to make sure the appropriate functionality is removed.
+
+`src/voldemort/cluster/failuredetector/ServerStoreVerifier.java`
+
+- `java.util.*`
+- ~~`voldemort.cluster.failuredetector.StoreVerifier`~~
+- `voldemort.VoldemortException`
+- `voldemort.cluster.Node`
+- `voldemort.server.RequestRoutingType`
+- `voldemort.server.StoreRepository`
+- `voldemort.server.VoldemortConfig`
+- `voldemort.store.Store`
+- `voldemort.store.UnreachableStoreException`
+- `voldemort.store.metadata.MetadataStore`
+- `voldemort.store.socket.SocketStoreFactory`
+- `voldemort.utils.ByteArray`
+- `voldemort.utils.Utils`
+
+This used to implement `StoreVerifier`, but I was able to remove that by
+patching a constant dependency.
+
+`src/voldemort/cluster/failuredetector/StoreVerifier.java`
+
+This is an interface that I was able to remove by just collapsing a constant
+value into `ServerStoreVerifier` and then changing references of
+`StoreVerifier` to `ServerStoreVerifier`.
