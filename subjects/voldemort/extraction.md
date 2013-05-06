@@ -292,3 +292,45 @@ patching a constant dependency.
 This is an interface that I was able to remove by just collapsing a constant
 value into `ServerStoreVerifier` and then changing references of
 `StoreVerifier` to `ServerStoreVerifier`.
+
+A mass exodus of packages and files:
+
+- `voldemort.versioning`
+- `voldemort.store.views`
+- `voldemort.store.versioned`
+- `voldemort.store.socket`
+- `voldemort.store.serialized`
+- `voldemort.store.rebalancing`
+- `voldemort.store.nonblockingstore`
+- `voldemort.store.mysql`
+- `voldemort.store.metadata`
+- `voldemort.store.memory`
+- `voldemort.store.logging`
+- `voldemort.store.invalidmetadata`
+- `voldemort.store.http`
+- `voldemort.store.gzip`
+- `voldemort.store.configuration`
+- `voldemort.store.compress`
+- `voldemort.store.bdb`
+- `voldemort.server.storage`
+- `voldemort.server.rebalance`
+- `voldemort.server.protocol`
+- `voldemort.server.jmx`
+- `voldemort.server.http`
+- `voldemort.store.socket.clientrequest`
+- `voldemort.store.slop`
+- `voldemort.annotations`
+- `voldemort.client`
+- `voldemort.serialization`
+- `voldemort.store.readonly`
+- `voldemort.store.stats`
+- `voldemort.store.routed.action`**
+- `voldemort.store.routed`**
+- `voldemort.server`
+- `voldemort.store`
+- `voldemort.utils`**
+- `voldemort.utils.pool`
+- `voldemort.xml`
+- `test/common`
+
+
