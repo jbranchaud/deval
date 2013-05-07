@@ -10,7 +10,9 @@ if [ -z "$DEVAL" ]
 then
     echo "Please set the environment variable DEVAL to the top-level
     directory of DEVAL. This is likely the directory that this shell script
-    is being run from."$'\n'
+    is being run from."
+    echo "Try using $(pwd)"
+    echo $'\n'
     missing_vars=1
 else
     echo "The DEVAL directory is set to $DEVAL"$'\n'
@@ -20,7 +22,9 @@ fi
 if [ -z "$DEVALSUB" ]
 then
     echo "Please set the environment variable DEVALSUB to the directory that
-    you would like DEVAL to use when setting up evaluation subjects."$'\n'
+    you would like DEVAL to use when setting up evaluation subjects."
+    echo "Try using $(pwd)/devalsub"
+    echo $'\n'
     missing_vars=1
 else
     echo "The DEVALSUB directory is set to $DEVALSUB"$'\n'
