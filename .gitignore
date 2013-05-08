@@ -2,3 +2,6 @@
 
 # don't want to commit projects cloned into the tmp directory
 tmp/*
+
+# python #
+*.pyc
