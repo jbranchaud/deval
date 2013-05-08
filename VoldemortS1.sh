@@ -96,4 +96,8 @@ sourceROI=$DEVAL/subjects/voldemort/scenario1-roi.txt
 destROI=${DEVALSUB}/voldemortE/scenario1/config1/target1/roi.txt
 cp $sourceROI $destROI
 
+# get out of the repository and delete it
+cd $DEVAL
+rm -rf $repodir
+
 echo "The project has been initialized for evaluation."
