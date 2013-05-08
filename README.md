@@ -35,3 +35,83 @@ to that file:
     export DEVAL=/absolute/path/for/deval
     export DEVALSUB=/absolute/path/for/deval/devalsub
 
+## Buiding a Scenario
+
+In order to quickly generate a scenario, there is some information that
+needs to be specified and a few configuration files that need to be created.
+
+### Specifying the Directory Structure
+
+Creating a directory structure for the example and/or scenario is tedious to
+do manually. To expedite this part of the process, we have a script,
+`dirify.py`, that will generate a directory structure as specified in a YAML
+file.
+
+If you want to create a directory structure that looks like this:
+
+    Example
+    |-scenario1
+      |-base
+      | |-src
+      | |-bin
+      |-source1
+      | |-src
+      | |-bin
+      |-target1
+      | |-src
+      | |-bin
+      |-config1
+        |-source1
+        | |-astdiff
+        | |-dotfiles
+        |-target1
+          |-astdiff
+          |-dotfiles
+
+You are going to need to create a YAML file that specifies that structure,
+similar to this:
+
+    ---
+    DirectoryStructure:
+    - base: "$DEVALSUB"
+      structure:
+      - name: "Example"
+        subs:
+        - name: "scenario1"
+          subs:
+          - name: "base"
+            subs:
+            - name: "src"
+            - name: "bin"
+          - name: "source1"
+            subs:
+            - name: "src"
+            - name: "bin"
+          - name: "target1"
+            subs:
+            - name: "src"
+            - name: "bin"
+          - name: "config1"
+            subs:
+            - name: "source1"
+              subs:
+              - name: "astdiff"
+              - name: "dotfiles"
+            - name: "target1"
+              subs:
+              - name: "astdiff"
+              - name: "dotfiles"
+    ...
+
+The `base` key is associated with the directory that this directory
+structure should be based in. The `structure` key is associated with a
+nested list that represents the directory structure to be created.
+
+Though this configuration file may seem a bit verbose, it can easily be
+copied and reused because the directory structure for most examples is
+almost identical. For instance, to create one for Example2, I simple copy
+the YAML file and replace `- name: "Example"` with `- name: "Example2"`.
+
+To run the script and generate the directory structure:
+
+    python dirify.py exampleconfig.yaml
