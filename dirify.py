@@ -55,6 +55,37 @@ def main(args):
 
     for directory in directory_list:
         create_directory(directory)
+
+def create_directory_structure(config_file):
+    """
+    create_directory_structure
+
+    given the path to a YAML configuration file that contains information
+    for a directory structure, this function will go through and the
+    information to generate the specified directory structure.
+    """
+    # check that the given file exists
+    if not check_file(config_file):
+        print("You have not provided a valid file, try again.")
+        sys.exit(1)
+
+    # extract the directory structure info from the file
+    directory_structures = grab_directory_structure(config_file)
+
+    # assume there is only 1 directory structure to create
+    directory_structure = directory_structures[0]
+
+    # grab the base and the structure dictionary
+    base = directory_structure[DIRBASE]
+    structure = directory_structure['structure']
+
+    # make sure we have the absolute base path
+    base = expand_path(base)
+
+    directory_list = build_directory_list(base, structure)
+
+    for directory in directory_list:
+        create_directory(directory)
     
 def build_directory_list(base, structure):
     """
