@@ -51,8 +51,6 @@ def main(args):
 
     directory_list = build_directory_list(base, structure)
 
-    print(directory_list)
-
     for directory in directory_list:
         create_directory(directory)
 
