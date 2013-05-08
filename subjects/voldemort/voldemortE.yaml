@@ -1,0 +1,39 @@
+name: "voldemortE"
+DirectoryStructure:
+- base: "$DEVALSUB"
+  structure:
+  - name: "voldemortE"
+    subs:
+    - name: "scenario1"
+      subs:
+      - name: "base"
+        subs:
+        - name: "src"
+        - name: "bin"
+        - name: "lib"
+      - name: "source1"
+        subs:
+        - name: "src"
+        - name: "bin"
+        - name: "lib"
+      - name: "target1"
+        subs:
+        - name: "src"
+        - name: "bin"
+        - name: "lib"
+      - name: "config1"
+        subs:
+        - name: "base"
+          subs:
+          - name: "astdiff"
+          - name: "dotfiles"
+        - name: "source1"
+          subs:
+          - name: "astdiff"
+          - name: "dotfiles"
+        - name: "target1"
+          subs:
+          - name: "astdiff"
+          - name: "dotfiles"
+        - name: "extras"
+      - name: "jpffiles"
