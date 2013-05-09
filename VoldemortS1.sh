@@ -92,8 +92,17 @@ cp -R $projectbin $destbin
 cp -R $projectlib/* $destlib
 
 # add the ROI.txt to the project
-sourceROI=$DEVAL/subjects/voldemort/scenario1-roi.txt
-destROI=${DEVALSUB}/voldemortE/scenario1/config1/target1/roi.txt
+sourceROI=$DEVAL/subjects/voldemort/scenario1-roi1.txt
+destROI=${DEVALSUB}/voldemortE/scenario1/config1/target1/roi1.txt
+cp $sourceROI $destROI
+sourceROI=$DEVAL/subjects/voldemort/scenario1-roi2.txt
+destROI=${DEVALSUB}/voldemortE/scenario1/config1/target1/roi2.txt
+cp $sourceROI $destROI
+sourceROI=$DEVAL/subjects/voldemort/scenario1-roi3.txt
+destROI=${DEVALSUB}/voldemortE/scenario1/config1/target1/roi3.txt
+cp $sourceROI $destROI
+sourceROI=$DEVAL/subjects/voldemort/scenario1-roi4.txt
+destROI=${DEVALSUB}/voldemortE/scenario1/config1/target1/roi4.txt
 cp $sourceROI $destROI
 
 # get out of the repository and delete it
