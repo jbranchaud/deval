@@ -26,7 +26,7 @@ Set the environment variable for the location of DEVAL and the DEVAL subjects:
 ### Add Environment Variables to Bash/Zsh Configuration (preferred)
 
 Rather than typing in the above environment variables manually and making
-sure they are always set, you can just add them to your `bashrc` or `zshrc`
+sure they are always set, you can just add them to your `bash` or `zsh`
 configurations so that they are always set for your environment. To do this,
 go to your home directory, find the `.bashrc` or `.zshrc` file depending on
 which shell environment you prefer, open it up, and add the following lines
