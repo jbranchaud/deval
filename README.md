@@ -59,7 +59,7 @@ If you want to create a directory structure that looks like this:
       | +-bin/
       +-target1/
       | +-src/
-      | |+-bin/
+      | +-bin/
       +-config1/
         +-source1/
         | +-astdiff/
