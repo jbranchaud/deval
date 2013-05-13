@@ -50,23 +50,23 @@ file.
 If you want to create a directory structure that looks like this:
 
     Example
-    |-scenario1
-      |-base
-      | |-src
-      | |-bin
-      |-source1
-      | |-src
-      | |-bin
-      |-target1
-      | |-src
-      | |-bin
-      |-config1
-        |-source1
-        | |-astdiff
-        | |-dotfiles
-        |-target1
-          |-astdiff
-          |-dotfiles
+    +-scenario1/
+      +-base/
+      | +-src/
+      | +-bin/
+      +-source1/
+      | +-src/
+      | +-bin/
+      +-target1/
+      | +-src/
+      | |+-bin/
+      +-config1/
+        +-source1/
+        | +-astdiff/
+        | +-dotfiles/
+        +-target1/
+          +-astdiff/
+          +-dotfiles/
 
 You are going to need to create a YAML file that specifies that structure,
 similar to this:
