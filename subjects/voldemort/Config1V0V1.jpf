@@ -1,0 +1,42 @@
+target = voldemort.MainDecaf
+
+@using=jpf-guided-test
+@using=jpf-symbc
+@using=jpf-regression
+
+classpath = ${DEVALSUB}/voldemortE/scenario1/source1/bin,\
+            ${DEVALSUB}/voldemortE/scenario1/source1/lib/google-collect-1.0.jar,\
+            ${DEVALSUB}/voldemortE/scenario1/source1/lib/junit-4.6.jar,\
+            ${DEVALSUB}/voldemortE/scenario1/source1/lib/annotations.jar
+
+sourcepath = ${DEVALSUB}/voldemortE/scenario1/source1/src
+
+symbolic.method= voldemort.MainDecaf.test(sym#sym)
+
+precise.analysis = true
+
+rse.ASTResults = ${DEVALSUB}/voldemortE/scenario1/config1/source1/astdiff
+
+rse.newClassInfo = ${DEVALSUB}/voldemortE/scenario1/source1/bin
+
+rse.oldClassInfo = ${DEVALSUB}/voldemortE/scenario1/base/bin
+
+rse.dotFile = ${DEVALSUB}/voldemortE/scenario1/config1/source1/dotfiles
+
+rse.statFile = ${DEVALSUB}/voldemortE/scenario1/config1/extras
+
+rse.printCounts = true
+
+rse.testCases = true
+
+rse.testFile = ${DEVALSUB}/voldemortE/scenario1/config1/extras/Config1V0V1.txt
+
+# listener to print information (PCs, test cases) about symbolic run
+#listener = gov.nasa.jpf.regression.listener.InterProcPruningListener;gov.nasa.jpf.regression.listener.RSESymbolicListener
+listener = gov.nasa.jpf.regression.listener.InterProcPruningListener
+
+symbc.listener=gov.nasa.jpf.regression.listener.TrackConstraintsListener
+
+#listener = gov.nasa.jpf.regression.listener.PruningRSEListener;gov.nasa.jpf.regression.listener.RSESymbolicListener
+
+search.depth_limit=10
