@@ -109,4 +109,19 @@ cp $sourceROI $destROI
 cd $DEVAL
 rm -rf $repodir
 
+# create the AST Diff XML files for the base->source and base->target
+baseSrc=$DEVALSUB/voldemortE/scenario1/base/src
+sourceSrc=$DEVALSUB/voldemortE/scenario1/source1/src
+targetSrc=$DEVALSUB/voldemortE/scenario1/target1/src
+baseToSource=$DEVALSUB/voldemortE/scenario1/config1/source1/astdiff
+baseToTarget=$DEVALSUB/voldemortE/scenario1/config1/target1/astdiff
+# ASTDiff for base->source
+echo "*************************************"
+echo "Generating ASTDiffs for Base -> Source1"
+$DEVAL/diffASTs.sh $baseSrc $sourceSrc $baseToSource
+# ASTDiff for base->target
+echo "*************************************"
+echo "Generating ASTDiffs for Base -> Target1"
+$DEVAL/diffASTs.sh $baseSrc $targetSrc $baseToTarget
+
 echo "The project has been initialized for evaluation."
