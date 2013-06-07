@@ -4,9 +4,9 @@ baseDir=$1
 sourceDir=$2
 destDir=$3
 
-echo $baseDir
-echo $sourceDir
-echo $destDir
+#echo $baseDir
+#echo $sourceDir
+#echo $destDir
 
 cd $baseDir
 for baseFile in $(find . -name '*.java')
