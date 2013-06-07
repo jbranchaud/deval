@@ -13,6 +13,9 @@ for baseFile in $(find . -name '*.java')
 do
 
     filename=${baseFile##*/}
-    java -cp $testHome/tools:$testHome/tools/tools.jar cse.unl.edu.ast.ASTDiffer -original ${baseFile/\./$baseDir} -modified ${baseFile/\./$sourceDir} -heu -xml -file $filename -dir $destDir
+    filepath=${baseFile%.*}
+    filepath=${filepath//\//\.}
+    filepath=${filepath//\.\./}
+    java -cp $testHome/tools:$testHome/tools/tools.jar cse.unl.edu.ast.ASTDiffer -original ${baseFile/\./$baseDir} -modified ${baseFile/\./$sourceDir} -heu -xml -file $filepath -dir $destDir
 
 done
